@@ -25,5 +25,12 @@
         "psr-4": {
             "PaulhenriL\\LaravelRouteHelpers\\Tests\\": "tests/"
         }
+    },
+    "extra": {
+        "laravel": {
+            "providers": [
+                "PaulhenriL\\LaravelRouteHelpers\\ServiceProvider"
+            ]
+        }
     }
 }
