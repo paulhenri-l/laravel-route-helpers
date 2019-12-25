@@ -52,18 +52,19 @@ PHP;
     {
         $functions = "\n";
 
+        /** @var RouteInfo $routeInfo */
         foreach ($routesInfo as $routeInfo) {
             $function = "\n";
 
             $function .= str_replace(
                 'HELPER_NAME',
-                $routeInfo['base_helper_name'],
+                $routeInfo->getHelperBaseName(),
                 static::PATH_HELPER
             );
 
             $function = str_replace(
                 'ROUTE_NAME',
-                $routeInfo['route_name'],
+                $routeInfo->getHelperBaseName(),
                 $function
             );
 
