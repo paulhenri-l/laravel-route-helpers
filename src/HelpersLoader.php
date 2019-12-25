@@ -30,8 +30,11 @@ class HelpersLoader
     /**
      * HelpersLoader constructor.
      */
-    public function __construct(Filesystem $files, HelpersGenerator $generator, array $config)
-    {
+    public function __construct(
+        Filesystem $files,
+        HelpersGenerator $generator,
+        array $config
+    ) {
         $this->files = $files;
         $this->generator = $generator;
         $this->config = $config;
@@ -46,9 +49,7 @@ class HelpersLoader
             $this->createFile();
         }
 
-        if ($this->helpersFileNeedsRecompilation()) {
-            $this->createFile();
-        }
+        $this->recompileIfNeeded();
 
         $this->files->getRequire($this->config['file_path']);
     }
@@ -56,24 +57,34 @@ class HelpersLoader
     /**
      * Create the helpers file.
      */
-    protected function createFile()
+    protected function createFile(): void
     {
-        $helpers = $this->generator->generateHelpers();
-
-        $this->files->replace($this->config['file_path'], $helpers);
+        $this->replaceHelpersFile(
+            $this->generator->generateHelpers()
+        );
     }
 
     /**
-     * Check if the helpers files needs to be recompiled.
+     * Recompile the helpers file if needed.
      */
-    protected function helpersFileNeedsRecompilation()
+    protected function recompileIfNeeded(): void
     {
         if (config('app.env') !== 'local') {
-            return false;
+            return;
         }
 
         $helpers = $this->generator->generateHelpers();
 
-        return $this->files->get($this->config['file_path']) !== $helpers;
+        if ($this->files->get($this->config['file_path']) !== $helpers) {
+            $this->replaceHelpersFile($helpers);
+        }
+    }
+
+    /**
+     * Replace the helpers file with the given content.
+     */
+    protected function replaceHelpersFile(string $content)
+    {
+        $this->files->replace($this->config['file_path'], $content);
     }
 }

@@ -3,21 +3,23 @@
 namespace PaulhenriL\LaravelRouteHelpers;
 
 use Illuminate\Filesystem\Filesystem;
-use Illuminate\Support\ServiceProvider;
+use Illuminate\Support\ServiceProvider as BaseServiceProvider;
 
-class ServiceProvider extends ServiceProvider
+class ServiceProvider extends BaseServiceProvider
 {
     /**
      * Bootstrap any application services.
      */
     public function boot()
     {
-        $generator = new HelpersGenerator($this->app->make('router'));
+        $this->app->booted(function () {
+            $generator = new HelpersGenerator($this->app->make('router'));
 
-        $loader = new HelpersLoader(new Filesystem(), $generator, [
-            'file_path' => $this->app->bootstrapPath('/cache/route_helpers.php')
-        ]);
+            $loader = new HelpersLoader(new Filesystem(), $generator, [
+                'file_path' => $this->app->bootstrapPath('/cache/route_helpers.php')
+            ]);
 
-        $loader->load();
+            $loader->load();
+        });
     }
 }
