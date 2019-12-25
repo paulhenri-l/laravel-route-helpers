@@ -1,0 +1,29 @@
+{
+    "name": "paulhenri-l/laravel-route-helpers",
+    "description": "Rails like route helpers to easily generate path to your laravel controllers",
+    "authors": [
+        {
+            "name": "paulhenri-l",
+            "email": "25308170+paulhenri-l@users.noreply.github.com"
+        }
+    ],
+    "type": "library",
+    "license": "MIT",
+    "require": {
+        "laravel/framework": "^6.9"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^8.5",
+        "orchestra/testbench": "^4.4"
+    },
+    "autoload": {
+        "psr-4": {
+            "PaulhenriL\\LaravelRouteHelpers\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "PaulhenriL\\LaravelRouteHelpers\\Tests\\": "tests/"
+        }
+    }
+}
