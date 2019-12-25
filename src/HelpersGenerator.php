@@ -10,8 +10,8 @@ class HelpersGenerator
      * The path route helper function blueprint.
      */
     protected const PATH_HELPER = <<<PHP
-if (!function_exists('HELPER_NAME_path')) {
-    function HELPER_NAME_path(\$params = [], \$absolute = true)
+if (!function_exists('HELPER_NAMEPath')) {
+    function HELPER_NAMEPath(\$params = [], \$absolute = true)
     {
         return route('ROUTE_NAME', \$params, \$absolute);
     }
@@ -53,7 +53,9 @@ PHP;
         $functions = "\n";
 
         foreach ($routesInfo as $routeInfo) {
-            $function = str_replace(
+            $function = "\n";
+
+            $function .= str_replace(
                 'HELPER_NAME',
                 $routeInfo['base_helper_name'],
                 static::PATH_HELPER
@@ -65,7 +67,7 @@ PHP;
                 $function
             );
 
-            $functions .= $function . "\n\n";
+            $functions .= $function . "\n";
         }
 
         return $functions;

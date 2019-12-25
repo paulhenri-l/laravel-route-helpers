@@ -120,7 +120,7 @@ class RouteInfoGatherer
                     $baseHelperName = false;
             }
 
-            $info['base_helper_name'] = $baseHelperName;
+            $info['base_helper_name'] = Str::camel($baseHelperName);
 
             return $info;
         })->filter(function (array $info) {
