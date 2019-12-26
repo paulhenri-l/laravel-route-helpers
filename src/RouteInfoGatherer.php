@@ -5,7 +5,6 @@ namespace PaulhenriL\LaravelRouteHelpers;
 use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Collection;
-use Illuminate\Support\Str;
 
 class RouteInfoGatherer
 {
@@ -50,7 +49,7 @@ class RouteInfoGatherer
     }
 
     /**
-     * Extract useful informations from the route.
+     * Convert the Route to a RouteInfo instance.
      */
     protected function convertToRouteInfoClass(Collection $routes): Collection
     {
@@ -72,7 +71,7 @@ class RouteInfoGatherer
 
     /**
      * Remove duplicate entries from the gathered info. (destroy, show, update)
-     * all use the same route.
+     * all use the same route so we only need one of them.
      */
     protected function removeDuplicates(Collection $routes)
     {

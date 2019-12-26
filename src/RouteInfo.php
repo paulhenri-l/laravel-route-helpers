@@ -82,6 +82,14 @@ class RouteInfo
     }
 
     /**
+     * Return this route name.
+     */
+    public function getRouteName()
+    {
+        return $this->routeName;
+    }
+
+    /**
      * Return the helper base name for this route.
      */
     public function getHelperBaseName()

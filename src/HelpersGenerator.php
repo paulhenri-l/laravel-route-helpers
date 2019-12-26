@@ -64,7 +64,7 @@ PHP;
 
             $function = str_replace(
                 'ROUTE_NAME',
-                $routeInfo->getHelperBaseName(),
+                $routeInfo->getRouteName(),
                 $function
             );
 

@@ -45,13 +45,21 @@ class HelpersLoader
      */
     public function load()
     {
-        if (!$this->files->exists($this->config['file_path'])) {
-            $this->createFile();
-        }
+        $this->createFileIfNeeded();
 
         $this->recompileIfNeeded();
 
         $this->files->getRequire($this->config['file_path']);
+    }
+
+    /**
+     * Create the helpers file if needed.
+     */
+    protected function createFileIfNeeded()
+    {
+        if (!$this->files->exists($this->config['file_path'])) {
+            $this->createFile();
+        }
     }
 
     /**
