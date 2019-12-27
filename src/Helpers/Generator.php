@@ -3,6 +3,7 @@
 namespace PaulhenriL\LaravelRouteHelpers\Helpers;
 
 use Illuminate\Routing\Router;
+use PaulhenriL\LaravelRouteHelpers\Route\Info;
 use PaulhenriL\LaravelRouteHelpers\Route\InfoGatherer;
 
 class Generator
@@ -11,8 +12,8 @@ class Generator
      * The path route helper function blueprint.
      */
     protected const PATH_HELPER = <<<PHP
-if (!function_exists('HELPER_NAMEPath')) {
-    function HELPER_NAMEPath(\$params = [], \$absolute = true)
+if (!function_exists('HELPER_NAME_path')) {
+    function HELPER_NAME_path(\$params = [], \$absolute = true)
     {
         return route('ROUTE_NAME', \$params, \$absolute);
     }

@@ -70,12 +70,51 @@ class InfoTest extends TestCase
         );
 
         $this->assertEquals('posts', $indexRoute->getHelperBaseName());
-        $this->assertEquals('newPost', $createRoute->getHelperBaseName());
+        $this->assertEquals('new_post', $createRoute->getHelperBaseName());
         $this->assertEquals('posts', $storeRoute->getHelperBaseName());
         $this->assertEquals('post', $showRoute->getHelperBaseName());
-        $this->assertEquals('editPost', $editRoute->getHelperBaseName());
+        $this->assertEquals('edit_post', $editRoute->getHelperBaseName());
         $this->assertEquals('post', $updateRoute->getHelperBaseName());
         $this->assertEquals('post', $destroyRoute->getHelperBaseName());
+    }
+
+    public function test_it_can_infer_the_helper_basename_for_irregular_words()
+    {
+        $indexRoute = new Info(
+            (new Route(['GET'], '/test', []))->name('people.index')
+        );
+
+        $createRoute = new Info(
+            (new Route(['GET'], '/test', []))->name('people.create')
+        );
+
+        $storeRoute = new Info(
+            (new Route(['GET'], '/test', []))->name('people.store')
+        );
+
+        $showRoute = new Info(
+            (new Route(['GET'], '/test', []))->name('people.show')
+        );
+
+        $editRoute = new Info(
+            (new Route(['GET'], '/test', []))->name('people.edit')
+        );
+
+        $updateRoute = new Info(
+            (new Route(['GET'], '/test', []))->name('people.update')
+        );
+
+        $destroyRoute = new Info(
+            (new Route(['GET'], '/test', []))->name('people.destroy')
+        );
+
+        $this->assertEquals('people', $indexRoute->getHelperBaseName());
+        $this->assertEquals('new_person', $createRoute->getHelperBaseName());
+        $this->assertEquals('people', $storeRoute->getHelperBaseName());
+        $this->assertEquals('person', $showRoute->getHelperBaseName());
+        $this->assertEquals('edit_person', $editRoute->getHelperBaseName());
+        $this->assertEquals('person', $updateRoute->getHelperBaseName());
+        $this->assertEquals('person', $destroyRoute->getHelperBaseName());
     }
 
     public function test_inference_works_with_nested_resources()
@@ -108,13 +147,13 @@ class InfoTest extends TestCase
             (new Route(['GET'], '/test', []))->name('posts.comments.destroy')
         );
 
-        $this->assertEquals('postComments', $indexRoute->getHelperBaseName());
-        $this->assertEquals('newPostComment', $createRoute->getHelperBaseName());
-        $this->assertEquals('postComments', $storeRoute->getHelperBaseName());
-        $this->assertEquals('postComment', $showRoute->getHelperBaseName());
-        $this->assertEquals('editPostComment', $editRoute->getHelperBaseName());
-        $this->assertEquals('postComment', $updateRoute->getHelperBaseName());
-        $this->assertEquals('postComment', $destroyRoute->getHelperBaseName());
+        $this->assertEquals('post_comments', $indexRoute->getHelperBaseName());
+        $this->assertEquals('new_post_comment', $createRoute->getHelperBaseName());
+        $this->assertEquals('post_comments', $storeRoute->getHelperBaseName());
+        $this->assertEquals('post_comment', $showRoute->getHelperBaseName());
+        $this->assertEquals('edit_post_comment', $editRoute->getHelperBaseName());
+        $this->assertEquals('post_comment', $updateRoute->getHelperBaseName());
+        $this->assertEquals('post_comment', $destroyRoute->getHelperBaseName());
     }
 
     public function test_helper_name_on_non_restful_route()

@@ -116,7 +116,7 @@ class Info
                     throw new NonRestfulRouteException($this->routeName);
             }
 
-            $this->cachedBaseHelperName = Str::camel($baseHelperName);
+            $this->cachedBaseHelperName = $baseHelperName;
         }
 
         return $this->cachedBaseHelperName;
