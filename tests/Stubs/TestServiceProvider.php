@@ -13,6 +13,9 @@ class TestServiceProvider extends ServiceProvider
      */
     static $addExtraRoutes = false;
 
+    /**
+     * Add test routes.
+     */
     public function boot()
     {
         $router = $this->app->make('router');

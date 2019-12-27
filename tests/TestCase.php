@@ -15,16 +15,6 @@ class TestCase extends \Orchestra\Testbench\TestCase
     protected static $recompilationChecksEnabled = false;
 
     /**
-     * Setup the test environment.
-     */
-    protected function setUp(): void
-    {
-        parent::setUp();
-
-        // Your code here
-    }
-
-    /**
      * Register Package providers for testing.
      */
     protected function getPackageProviders($app)

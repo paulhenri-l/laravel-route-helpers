@@ -1,6 +1,6 @@
 {
     "name": "paulhenri-l/laravel-route-helpers",
-    "description": "Rails like route helpers to easily generate path to your laravel controllers",
+    "description": "Rails like route helpers to easily generate paths to your laravel controllers",
     "authors": [
         {
             "name": "paulhenri-l",

@@ -8,13 +8,11 @@ class CompileHelpersCommandTest extends TestCase
 {
     public function test_compilation()
     {
-        $this->rebootApp(function () {
-            $generatedFile = base_path(config('route_helpers.helpers_path'));
+        $generatedFile = base_path(config('route_helpers.helpers_path'));
 
-            if (file_exists($generatedFile)) {
-                unlink($generatedFile);
-            }
-        });
+        if (file_exists($generatedFile)) {
+            unlink($generatedFile);
+        }
 
         $this->artisan('route:compile-helpers')
             ->expectsOutput('Helper file compiled');
