@@ -43,7 +43,7 @@ class Loader
     /**
      * Load the helpers file. Will create it if needed.
      */
-    public function load()
+    public function load(): void
     {
         $this->createFileIfNeeded();
 
@@ -53,9 +53,19 @@ class Loader
     }
 
     /**
+     * Force the file recompilation.
+     */
+    public function forceRecompile(): void
+    {
+        $this->replaceHelpersFile(
+            $this->generator->generateHelpers()
+        );
+    }
+
+    /**
      * Create the helpers file if needed.
      */
-    protected function createFileIfNeeded()
+    protected function createFileIfNeeded(): void
     {
         if (!$this->files->exists($this->config['file_path'])) {
             $this->createFile();
@@ -91,7 +101,7 @@ class Loader
     /**
      * Replace the helpers file with the given content.
      */
-    protected function replaceHelpersFile(string $content)
+    protected function replaceHelpersFile(string $content): void
     {
         $this->files->replace($this->config['file_path'], $content);
     }

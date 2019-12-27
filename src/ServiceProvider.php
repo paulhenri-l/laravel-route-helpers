@@ -4,6 +4,7 @@ namespace PaulhenriL\LaravelRouteHelpers;
 
 use Illuminate\Filesystem\Filesystem;
 use Illuminate\Support\ServiceProvider as BaseServiceProvider;
+use PaulhenriL\LaravelRouteHelpers\Commands\RouteCompileHelpers;
 use PaulhenriL\LaravelRouteHelpers\Helpers\Generator;
 use PaulhenriL\LaravelRouteHelpers\Helpers\Loader;
 
@@ -33,11 +34,17 @@ class ServiceProvider extends BaseServiceProvider
             $generator = new Generator($this->app->make('router'));
 
             $loader = new Loader(new Filesystem(), $generator, [
-                'file_path' => $this->app->basePath(config('route_helpers.helpers_path')),
+                'file_path' => base_path(config('route_helpers.helpers_path')),
                 'recompilation_checks_enabled' => config('route_helpers.recompilation_checks_enabled')
             ]);
 
             $loader->load();
         });
+
+        if ($this->app->runningInConsole()) {
+            $this->commands([
+                RouteCompileHelpers::class
+            ]);
+        }
     }
 }
