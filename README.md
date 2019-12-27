@@ -1,7 +1,5 @@
 # Laravel route helpers
 
-Rails like route helpers for your laravel app!
-
 Route helpers are simple function that will generate paths to your application
 resources.
 
@@ -42,9 +40,6 @@ You can install this package using composer
 
 ```shell script
 composer require paulhenri-l/laravel-route-helpers
-
-# You can optionnaly publish the config file
-artisan vendor:publish --provider="PaulhenriL\LaravelRouteHelpers\ServiceProvider"
 ```
 
 ## Usage
@@ -52,8 +47,8 @@ artisan vendor:publish --provider="PaulhenriL\LaravelRouteHelpers\ServiceProvide
 Register your routes just as usual but give them names. On the next application
 boot the helpers will be generated and loaded.
 
-Your route names should be one of the 7 restful names used by laravel: (
-\*.index, \*.create, \*.store, \*.show, \*.edit, \*.update and \*.destroy)
+Your route names should be one of the 7 restful names used by laravel (\*.index,
+\*.create, \*.store, \*.show, \*.edit, \*.update and \*.destroy)
 
 ```php
 Route::resource('comments', 'CommentsController');
@@ -83,7 +78,7 @@ create_post_comment_path();
 edit_post_comment_path();
 ```
 
-#### Irregular names
+### Irregular names
 
 If you are using irregular names for your resources, the correct singular form
 will be used for the helpers.
@@ -103,28 +98,13 @@ If this tool cannot guess the correct singular form for your route name you'll
 have to configure it:
 [https://stackoverflow.com/questions/25646229/laravel-custom-inflection](https://stackoverflow.com/questions/25646229/laravel-custom-inflection)
 
-#### Singular resources
+### Singular resources
 
-If you have singular resources you should not use the index function to avoid
-conflicts with the plural and singular helpers.
+If you have singular resources you cannot use the index function as it would
+create conflicts between the plural and singular helpers.
 
 ```php
 Route::resource('account', 'AccountController')->except('index');
-```
-
-#### Compile the helpers file manually
-
-When you run your application using the `local` environement the helpers file
-will get recompiled whenever you change your routes file.
-
-In any other environment the helpers file if not present will be generated on
-the first boot of your application.
-
-You can also manually launch the generation of the helpers file from your ci/cd
-pipeline by calling the `route:compile-helpers` artisan command.
-
-```shell script
-php artisan route:compile-helpers
 ```
 
 ### Helpers works just like the route function
@@ -137,6 +117,21 @@ posts_path(['query' => 'param']);
 posts_path(['query' => 'param'], true);
 post_path($post);
 post_comment_path([$post, $comment]);
+```
+
+### Compile the helpers file manually
+
+When you run your application using the `local` environement the helpers file
+will get recompiled whenever you change your routes file.
+
+In any other environment the helpers file if not present will be generated on
+the first boot of your application.
+
+You can also manually launch the generation of the helpers file by calling this
+artisan command.
+
+```shell script
+php artisan route:compile-helpers
 ```
 
 ## Contributing
