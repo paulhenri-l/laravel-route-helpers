@@ -1,10 +1,11 @@
 <?php
 
-namespace PaulhenriL\LaravelRouteHelpers;
+namespace PaulhenriL\LaravelRouteHelpers\Helpers;
 
 use Illuminate\Routing\Router;
+use PaulhenriL\LaravelRouteHelpers\Route\InfoGatherer;
 
-class HelpersGenerator
+class Generator
 {
     /**
      * The path route helper function blueprint.
@@ -38,7 +39,7 @@ PHP;
      */
     public function generateHelpers(): string
     {
-        $routesInfo = (new RouteInfoGatherer($this->router))->gatherInfo();
+        $routesInfo = (new InfoGatherer($this->router))->gatherInfo();
 
         $functions = $this->generateHelperFunctions($routesInfo);
 
@@ -52,7 +53,7 @@ PHP;
     {
         $functions = "\n";
 
-        /** @var RouteInfo $routeInfo */
+        /** @var Info $routeInfo */
         foreach ($routesInfo as $routeInfo) {
             $function = "\n";
 

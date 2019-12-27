@@ -1,12 +1,12 @@
 <?php
 
-namespace PaulhenriL\LaravelRouteHelpers;
+namespace PaulhenriL\LaravelRouteHelpers\Route;
 
 use Illuminate\Routing\Route;
 use Illuminate\Routing\Router;
 use Illuminate\Support\Collection;
 
-class RouteInfoGatherer
+class InfoGatherer
 {
     /**
      * The Router instance.
@@ -54,7 +54,7 @@ class RouteInfoGatherer
     protected function convertToRouteInfoClass(Collection $routes): Collection
     {
         return $routes->map(function (Route $route) {
-            return new RouteInfo($route);
+            return new Info($route);
         });
     }
 
@@ -64,7 +64,7 @@ class RouteInfoGatherer
      */
     protected function removeNonRestfulRoutes(Collection $routes): Collection
     {
-        return $routes->filter(function (RouteInfo $routeInfo) {
+        return $routes->filter(function (Info $routeInfo) {
             return $routeInfo->isRestful();
         });
     }
@@ -75,7 +75,7 @@ class RouteInfoGatherer
      */
     protected function removeDuplicates(Collection $routes)
     {
-        return $routes->unique(function (RouteInfo $routeInfo) {
+        return $routes->unique(function (Info $routeInfo) {
             return $routeInfo->getHelperBaseName();
         });
     }

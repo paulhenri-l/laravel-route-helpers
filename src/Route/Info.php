@@ -1,11 +1,12 @@
 <?php
 
-namespace PaulhenriL\LaravelRouteHelpers;
+namespace PaulhenriL\LaravelRouteHelpers\Route;
 
 use Illuminate\Routing\Route;
 use Illuminate\Support\Str;
+use PaulhenriL\LaravelRouteHelpers\Exceptions\NonRestfulRouteException;
 
-class RouteInfo
+class Info
 {
     /**
      * The route name.
@@ -101,7 +102,7 @@ class RouteInfo
                     $baseHelperName = $this->nesting . $this->resourcePlural;
                     break;
                 case 'create':
-                    $baseHelperName = "new_{$this->nesting}{$this->resourcePlural}";
+                    $baseHelperName = "new_{$this->nesting}{$this->resourceSingular}";
                     break;
                 case 'edit':
                     $baseHelperName = "edit_{$this->nesting}{$this->resourceSingular}";
@@ -112,7 +113,7 @@ class RouteInfo
                     $baseHelperName = $this->nesting . $this->resourceSingular;
                     break;
                 default:
-                    $baseHelperName = false;
+                    throw new NonRestfulRouteException($this->routeName);
             }
 
             $this->cachedBaseHelperName = Str::camel($baseHelperName);

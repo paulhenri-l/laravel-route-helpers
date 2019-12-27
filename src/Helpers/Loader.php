@@ -1,10 +1,10 @@
 <?php
 
-namespace PaulhenriL\LaravelRouteHelpers;
+namespace PaulhenriL\LaravelRouteHelpers\Helpers;
 
 use Illuminate\Filesystem\Filesystem;
 
-class HelpersLoader
+class Loader
 {
     /**
      * The Filesystem instance.
@@ -16,7 +16,7 @@ class HelpersLoader
     /**
      * The HelpersGenerator instance.
      *
-     * @var HelpersGenerator
+     * @var Generator
      */
     protected $generator;
 
@@ -32,7 +32,7 @@ class HelpersLoader
      */
     public function __construct(
         Filesystem $files,
-        HelpersGenerator $generator,
+        Generator $generator,
         array $config
     ) {
         $this->files = $files;
@@ -77,7 +77,7 @@ class HelpersLoader
      */
     protected function recompileIfNeeded(): void
     {
-        if (config('app.env') !== 'local') {
+        if (!$this->config['recompilation_checks_enabled']) {
             return;
         }
 
