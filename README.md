@@ -1,5 +1,7 @@
 # Laravel route helpers
 
+[![Build Status](https://travis-ci.org/paulhenri-l/laravel-route-helpers.svg?branch=master)](https://travis-ci.org/paulhenri-l/laravel-route-helpers)
+
 Route helpers are simple function that will generate paths to your application
 resources.
 
@@ -31,7 +33,7 @@ Which can in turn be used in your views/app like so:
 redirect()->to(posts_path()); // Redirect to posts.index
 ```
 
-The end goal is to leverage autocompletion in order to rapidly create path to 
+The end goal is to leverage autocompletion in order to rapidly create path to
 our resources while not having to remember the exact route name.
 
 ## Installation
@@ -94,7 +96,7 @@ create_person_path();
 edit_person_path();
 ```
 
-If this tool cannot guess the correct singular form for your route name you'll 
+If this tool cannot guess the correct singular form for your route name you'll
 have to configure it:
 [https://stackoverflow.com/questions/25646229/laravel-custom-inflection](https://stackoverflow.com/questions/25646229/laravel-custom-inflection)
 
