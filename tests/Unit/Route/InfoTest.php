@@ -166,4 +166,31 @@ class InfoTest extends TestCase
 
         $routeInfo->getHelperBaseName();
     }
+
+    public function test_info_can_be_created_on_single_word_routes()
+    {
+        $routeInfo = new Info(
+            (new Route(['GET'], '/test', []))->name('login')
+        );
+
+        $this->assertFalse($routeInfo->isValid());
+    }
+
+    public function test_is_valid_detects_non_restful_routes()
+    {
+        $routeInfo = new Info(
+            (new Route(['GET'], '/test', []))->name('login.toto')
+        );
+
+        $this->assertFalse($routeInfo->isValid());
+    }
+
+    public function test_is_valid_detects_no_word_routes()
+    {
+        $routeInfo = new Info(
+            (new Route(['GET'], '/test', []))->name('')
+        );
+
+        $this->assertFalse($routeInfo->isValid());
+    }
 }

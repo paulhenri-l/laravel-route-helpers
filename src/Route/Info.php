@@ -60,10 +60,25 @@ class Info
         $parts = explode('.', $this->routeName);
         $this->action = array_pop($parts);
         $this->resourcePlural = array_pop($parts);
-        $this->resourceSingular = Str::singular($this->resourcePlural);
+
+        $this->resourceSingular = $this->resourcePlural
+            ? Str::singular($this->resourcePlural)
+            : null;
+
         $this->nesting = array_reduce($parts, function ($acc, $part) {
             return $acc . Str::singular($part) . '_';
         }, '');
+    }
+
+    /**
+     * Determine if valid for helper generation.
+     */
+    public function isValid()
+    {
+        return $this->resourcePlural != null
+            && $this->action != null
+            && $this->resourceSingular != null
+            && $this->isRestful();
     }
 
     /**
