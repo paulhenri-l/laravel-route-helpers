@@ -32,7 +32,7 @@ class InfoGatherer
 
         $routes = $this->removeUnnamedRoutes($routes);
         $routes = $this->convertToRouteInfoClass($routes);
-        $routes = $this->removeNonRestfulRoutes($routes);
+        $routes = $this->removeInvalidRoutes($routes);
         $routes = $this->removeDuplicates($routes);
 
         return $routes->toArray();
@@ -59,13 +59,12 @@ class InfoGatherer
     }
 
     /**
-     * Route helpers can only be generated for restful routes so we'll need to
-     * remove the non restful ones.
+     * Route helpers can only be generated with valid RouteInfo classes.
      */
-    protected function removeNonRestfulRoutes(Collection $routes): Collection
+    protected function removeInvalidRoutes(Collection $routes): Collection
     {
         return $routes->filter(function (Info $routeInfo) {
-            return $routeInfo->isRestful();
+            return $routeInfo->isValid();
         });
     }
 

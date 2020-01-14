@@ -9,6 +9,11 @@ use PaulhenriL\LaravelRouteHelpers\Exceptions\NonRestfulRouteException;
 class Info
 {
     /**
+     * PHP allowed function name regex.
+     */
+    protected const PHP_FUNCTION_REGEX = '/^[a-zA-Z_\x80-\xff][a-zA-Z0-9_\x80-\xff]*$/';
+
+    /**
      * The route name.
      *
      * @var string
@@ -78,7 +83,8 @@ class Info
         return $this->resourcePlural != null
             && $this->action != null
             && $this->resourceSingular != null
-            && $this->isRestful();
+            && $this->isRestful()
+            && $this->hasOnlyAllowedChars();
     }
 
     /**
@@ -135,5 +141,16 @@ class Info
         }
 
         return $this->cachedBaseHelperName;
+    }
+
+    /**
+     * Will the function name be composed of chars that are allowed in php
+     * function names?
+     */
+    protected function hasOnlyAllowedChars(): bool
+    {
+        return preg_match(
+            static::PHP_FUNCTION_REGEX, $this->getHelperBaseName()
+        );
     }
 }

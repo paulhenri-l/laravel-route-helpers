@@ -52,6 +52,10 @@ boot the helpers will be generated and loaded.
 Your route names should be one of the 7 restful names used by laravel (\*.index,
 \*.create, \*.store, \*.show, \*.edit, \*.update and \*.destroy)
 
+*Your route names should only contain alpha numeric characters, dots and
+underscores any route that does not comply to this pattern will not get helpers
+generated for it.*
+
 ```php
 Route::resource('comments', 'CommentsController');
 ```

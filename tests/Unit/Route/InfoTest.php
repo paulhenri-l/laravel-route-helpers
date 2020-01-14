@@ -193,4 +193,13 @@ class InfoTest extends TestCase
 
         $this->assertFalse($routeInfo->isValid());
     }
+
+    public function test_routes_with_invalid_names_are_discred()
+    {
+        $routeInfo = new Info(
+            (new Route(['GET'], '/test', []))->name('hello-from:test.index')
+        );
+
+        $this->assertFalse($routeInfo->isValid());
+    }
 }
